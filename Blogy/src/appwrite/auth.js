@@ -1,6 +1,6 @@
 // Authentication using appwrite
 
-import config from "../config/config";
+import conf from "../conf/conf";
 import { Client, Account , ID } from "appwrite";
 
 export class AuthService{
@@ -9,8 +9,8 @@ export class AuthService{
 
     constructor(){ // Connects your app to the correct Appwrite API endpoint + project
         this.client
-            .setEndpoint(config.appwriteUrl)
-            .setProject(config.appwriteProjectId)
+            .setEndpoint(conf.appwriteUrl)
+            .setProject(conf.appwriteProjectId)
             this.account = new Account (this.client);
     }
 
@@ -27,7 +27,8 @@ export class AuthService{
             }
             
         } catch (error) {
-            throw error;
+            console.log("Appwrite: Error in creating account: " , error);
+            
         }
     }
 
@@ -36,7 +37,7 @@ export class AuthService{
             return await this.account.createEmailPasswordSession(email , password);
             
         } catch (error) {
-            throw error;
+            console.log("Appwrite: Error in login: " , error);
         }
     }
 
@@ -49,7 +50,7 @@ export class AuthService{
             return await this.account.get()
             
         } catch (error) {
-            throw error;
+            console.log("Appwrite: Error in checking user status: " , error);
         }
 
         return null;
@@ -60,7 +61,7 @@ export class AuthService{
             await this.account.deleteSessions();
             
         } catch (error) {
-            throw error;
+            console.log("Appwrite: Error logging out: " , error);
         }
     }
 }

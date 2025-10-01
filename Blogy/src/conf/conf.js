@@ -1,4 +1,4 @@
-const config = {
+const conf = {
 
     appwriteUrl: String(import.meta.env.VITE_APPWRITE_URL),
     appwriteProjectId: String(import.meta.env.VITE_APPWRITE_PROJECT_ID),
@@ -7,7 +7,7 @@ const config = {
     appwriteBucketId: String(import.meta.env.VITE_APPWRITE_BUCKET_ID)
 }
 
-export default config
+export default conf
 
 
 // This is a configuration file . This ensures that we get all the env variables values in string format
