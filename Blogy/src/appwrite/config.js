@@ -87,13 +87,12 @@ export class Service{
            
         } catch (error) {
             console.log("Appwrite: Error getting post from database : " , error);
+            //throw error;
             return false;
-            
-            
         }
     }
 
-    async getPosts(queries = [Query.equal("status" , "active")]){ // we want to take all posts with status set to active
+    async getPosts(queries = [Query.equal("Status" , ["active"])]){ // we want to take all posts with status set to active
         try {
             
             return await this.databases.listDocuments(
@@ -140,11 +139,18 @@ export class Service{
         }
     }
 
-    getFilePreview(fileId){
-        this.bucket.getFilePreview(
+    // getFilePreview(fileId){
+    //    return this.bucket.getFilePreview(
+    //         conf.appwriteBucketId,
+    //         fileId,
+    //     )
+    // }
+
+    getFileView(fileId){
+        return this.bucket.getFileView(
             conf.appwriteBucketId,
-            fileId,
-        )
+            fileId
+        );
     }
 
 };

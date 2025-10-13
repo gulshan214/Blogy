@@ -14,7 +14,7 @@ export class AuthService{
             this.account = new Account (this.client);
     }
 
-    async createAccount({email, passsword ,name}){
+    async createAccount({email, password ,name}){
         try {
 
             const userAccount = await this.account.create(ID.unique() , email , password , name);
@@ -38,6 +38,7 @@ export class AuthService{
             
         } catch (error) {
             console.log("Appwrite: Error in login: " , error);
+            throw error;
         }
     }
 
@@ -51,9 +52,10 @@ export class AuthService{
             
         } catch (error) {
             console.log("Appwrite: Error in checking user status: " , error);
+            return null;
         }
 
-        return null;
+         
     }
 
     async logout(){
